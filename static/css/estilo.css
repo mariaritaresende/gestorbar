@@ -1,0 +1,23 @@
+/* Estilos da área pública do GestorBar (Bootstrap 5) */
+
+.hero {
+    padding: 4rem 0 3rem;
+}
+
+.hero .marca {
+    color: var(--bs-warning);
+}
+
+.card-recurso {
+    height: 100%;
+    transition: transform 0.15s ease;
+}
+
+.card-recurso:hover {
+    transform: translateY(-3px);
+}
+
+.card-recurso .bi {
+    font-size: 2rem;
+    color: var(--bs-warning);
+}
