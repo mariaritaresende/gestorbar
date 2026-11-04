@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block titulo %}GestorBar — Gestão para bares e restaurantes{% endblock %}
+
+{% block conteudo %}
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <h1 class="display-5 fw-bold">Seu bar organizado, <span class="marca">da mesa ao estoque</span>.</h1>
+        <p class="lead text-body-secondary mt-3">
+          Comandas por mesa, cardápio com ficha técnica e controle de bebidas e ingredientes
+          com baixa automática no estoque a cada conta fechada.
+        </p>
+        <div class="d-flex gap-2 mt-4 flex-wrap">
+          <a href="{% url 'admin:index' %}" class="btn btn-warning btn-lg">
+            <i class="bi bi-speedometer2"></i> Acessar painel
+          </a>
+          <span class="btn btn-outline-secondary btn-lg disabled" aria-disabled="true">
+            Área do cliente (em breve)
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row g-3 row-cols-1 row-cols-md-2 row-cols-lg-4">
+      <div class="col">
+        <div class="card card-recurso">
+          <div class="card-body">
+            <i class="bi bi-receipt"></i>
+            <h5 class="card-title mt-2">Comandas</h5>
+            <p class="card-text small text-body-secondary">Abertura por mesa, itens com status de preparo e fechamento com taxa de serviço.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-recurso">
+          <div class="card-body">
+            <i class="bi bi-journal-text"></i>
+            <h5 class="card-title mt-2">Cardápio</h5>
+            <p class="card-text small text-body-secondary">Categorias, preços e ficha técnica com custo e margem de cada prato.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-recurso">
+          <div class="card-body">
+            <i class="bi bi-box-seam"></i>
+            <h5 class="card-title mt-2">Estoque</h5>
+            <p class="card-text small text-body-secondary">Bebidas e ingredientes com alerta de estoque mínimo e de validade.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card card-recurso">
+          <div class="card-body">
+            <i class="bi bi-people"></i>
+            <h5 class="card-title mt-2">Perfis</h5>
+            <p class="card-text small text-body-secondary">Gerente, garçom, cozinha/bar e cliente, cada um com suas permissões.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

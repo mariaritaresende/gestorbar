@@ -1,0 +1,12 @@
+{% extends "registration/base.html" %}
+{% load jazzmin %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
+
+{% block cabecalho %}<h1 class="gb-acesso__titulo">Você saiu do painel</h1>{% endblock %}
+
+{% block content %}
+    <p class="login-box-msg">Para continuar trabalhando, entre de novo com seu usuário.</p>
+    <div class="d-grid">
+        <a class="btn {{ jazzmin_ui.button_classes.primary }}" href="{% url 'admin:index' %}">Entrar novamente</a>
+    </div>
+{% endblock %}
