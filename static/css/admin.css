@@ -45,3 +45,73 @@
     border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
+
+/* Campos de busca (autocomplete/select2) visíveis nos temas claro e escuro.
+   O Django usa variáveis de cor próprias que o Jazzmin não define. */
+body .select2-container--admin-autocomplete .select2-selection,
+body .select2-container--default .select2-selection {
+    background-color: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    min-height: calc(1.5em + 0.75rem + 2px);
+}
+
+body .select2-container--admin-autocomplete .select2-selection__rendered,
+body .select2-container--default .select2-selection__rendered {
+    color: var(--bs-body-color);
+    line-height: calc(1.5em + 0.75rem);
+}
+
+body .select2-container--admin-autocomplete .select2-selection__placeholder,
+body .select2-container--default .select2-selection__placeholder {
+    color: var(--bs-secondary-color);
+}
+
+body .select2-container--admin-autocomplete .select2-selection__arrow,
+body .select2-container--default .select2-selection__arrow {
+    height: calc(1.5em + 0.75rem);
+}
+
+body .select2-container--admin-autocomplete .select2-selection__arrow b,
+body .select2-container--default .select2-selection__arrow b {
+    border-top-color: var(--bs-body-color);
+}
+
+body .select2-dropdown {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    border-color: var(--bs-border-color);
+}
+
+body .select2-search__field {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    border: 1px solid var(--bs-border-color);
+}
+
+body .select2-results__option {
+    color: var(--bs-body-color);
+}
+
+body .select2-results__option--highlighted,
+body .select2-container--admin-autocomplete .select2-results__option--highlighted[aria-selected],
+body .select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: var(--bs-primary);
+    color: #fff;
+}
+
+/* O tema "admin-autocomplete" do Django usa as variáveis abaixo, que o Jazzmin
+   não define (por isso os campos ficavam sem fundo e sem borda). Aqui elas são
+   ligadas às cores do Bootstrap, só dentro desses campos. */
+.select2-container--admin-autocomplete {
+    --body-bg: var(--bs-body-bg);
+    --body-fg: var(--bs-body-color);
+    --body-quiet-color: var(--bs-secondary-color);
+    --border-color: var(--bs-border-color);
+    --hairline-color: var(--bs-border-color);
+    --darkened-bg: var(--bs-tertiary-bg);
+    --selected-bg: var(--bs-secondary-bg);
+    --selected-row: var(--bs-secondary-bg);
+    --primary: var(--bs-primary);
+    --primary-fg: #fff;
+}
