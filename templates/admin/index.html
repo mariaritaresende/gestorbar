@@ -1,0 +1,75 @@
+{% extends "admin/index.html" %}
+{% comment %}
+  Sobrescreve o painel inicial do Jazzmin acrescentando cartões de resumo
+  (sistema de templates do admin). O "extends" de mesmo nome carrega o
+  template original do Jazzmin e o {{ block.super }} mantém a lista de apps.
+  Os cartões usam classes do Bootstrap 5, o mesmo do Jazzmin 3.
+{% endcomment %}
+{% load painel %}
+
+{% block content %}
+{% painel_resumo as resumo %}
+<div class="row g-3 mb-4">
+  {% if perms.pedidos.view_mesa %}
+  <div class="col-sm-6 col-xl-3">
+    <a href="{% url 'admin:pedidos_mesa_changelist' %}?status__exact=OCUPADA"
+       class="card cartao-resumo text-bg-info h-100 text-decoration-none">
+      <div class="card-body">
+        <div>
+          <div class="cartao-numero">{{ resumo.mesas_ocupadas }}/{{ resumo.mesas_total }}</div>
+          <div>Mesas ocupadas</div>
+        </div>
+        <i class="fas fa-chair"></i>
+      </div>
+    </a>
+  </div>
+  {% endif %}
+
+  {% if perms.pedidos.view_comanda %}
+  <div class="col-sm-6 col-xl-3">
+    <a href="{% url 'admin:pedidos_comanda_changelist' %}?status__exact=ABERTA"
+       class="card cartao-resumo text-bg-success h-100 text-decoration-none">
+      <div class="card-body">
+        <div>
+          <div class="cartao-numero">{{ resumo.comandas_abertas }}</div>
+          <div>Comandas abertas · hoje: {{ resumo.faturamento_hoje }}</div>
+        </div>
+        <i class="fas fa-receipt"></i>
+      </div>
+    </a>
+  </div>
+  {% endif %}
+
+  {% if perms.pedidos.view_itempedido %}
+  <div class="col-sm-6 col-xl-3">
+    <a href="{% url 'admin:pedidos_itempedido_changelist' %}?fila=sim"
+       class="card cartao-resumo text-bg-warning h-100 text-decoration-none">
+      <div class="card-body">
+        <div>
+          <div class="cartao-numero">{{ resumo.itens_pendentes }}</div>
+          <div>Itens na fila da cozinha/bar</div>
+        </div>
+        <i class="fas fa-concierge-bell"></i>
+      </div>
+    </a>
+  </div>
+  {% endif %}
+
+  {% if perms.inventario.view_insumo %}
+  <div class="col-sm-6 col-xl-3">
+    <a href="{% url 'admin:inventario_insumo_changelist' %}?situacao=BAIXO"
+       class="card cartao-resumo text-bg-danger h-100 text-decoration-none">
+      <div class="card-body">
+        <div>
+          <div class="cartao-numero">{{ resumo.insumos_baixos }}</div>
+          <div>Insumos abaixo do mínimo · zerados: {{ resumo.insumos_zerados }}</div>
+        </div>
+        <i class="fas fa-boxes"></i>
+      </div>
+    </a>
+  </div>
+  {% endif %}
+</div>
+
+{{ block.super }}
+{% endblock %}

@@ -236,12 +236,12 @@ class ItemCardapioAdmin(admin.ModelAdmin):
     def estoque_ok(self, obj):
         return obj.tem_estoque()
 
-    @admin.action(description="Marcar como disponível")
+    @admin.action(permissions=["change"], description="Marcar como disponível")
     def marcar_disponivel(self, request, queryset):
         total = queryset.update(disponivel=True)
         self.message_user(request, f"{total} item(ns) disponível(is) no cardápio.", messages.SUCCESS)
 
-    @admin.action(description="Marcar como indisponível")
+    @admin.action(permissions=["change"], description="Marcar como indisponível")
     def marcar_indisponivel(self, request, queryset):
         total = queryset.update(disponivel=False)
         self.message_user(request, f"{total} item(ns) retirado(s) do cardápio.", messages.WARNING)
@@ -267,14 +267,14 @@ class MesaAdmin(admin.ModelAdmin):
         comanda = obj.comanda_aberta
         return f"#{comanda.pk}" if comanda else "—"
 
-    @admin.action(description="Liberar mesas (sem comanda aberta)")
+    @admin.action(permissions=["change"], description="Liberar mesas (sem comanda aberta)")
     def liberar(self, request, queryset):
         total = queryset.exclude(comandas__status=Comanda.Status.ABERTA).update(
             status=Mesa.Status.LIVRE
         )
         self.message_user(request, f"{total} mesa(s) liberada(s).", messages.SUCCESS)
 
-    @admin.action(description="Colocar em manutenção (sem comanda aberta)")
+    @admin.action(permissions=["change"], description="Colocar em manutenção (sem comanda aberta)")
     def colocar_em_manutencao(self, request, queryset):
         total = queryset.exclude(comandas__status=Comanda.Status.ABERTA).update(
             status=Mesa.Status.MANUTENCAO
@@ -301,12 +301,12 @@ class ReservaAdmin(admin.ModelAdmin):
     def status_colorido(self, obj):
         return badge_status(obj)
 
-    @admin.action(description="Confirmar reservas selecionadas")
+    @admin.action(permissions=["change"], description="Confirmar reservas selecionadas")
     def confirmar(self, request, queryset):
         total = queryset.filter(status=Reserva.Status.PENDENTE).update(status=Reserva.Status.CONFIRMADA)
         self.message_user(request, f"{total} reserva(s) confirmada(s).", messages.SUCCESS)
 
-    @admin.action(description="Cancelar reservas selecionadas")
+    @admin.action(permissions=["change"], description="Cancelar reservas selecionadas")
     def cancelar(self, request, queryset):
         total = queryset.filter(status__in=Reserva.STATUS_ATIVOS).update(status=Reserva.Status.CANCELADA)
         self.message_user(request, f"{total} reserva(s) cancelada(s).", messages.WARNING)
@@ -454,7 +454,7 @@ class ComandaAdmin(admin.ModelAdmin):
             format_html_join("", "<tr><td>{}</td><td><strong>{}</strong></td></tr>", linhas),
         )
 
-    @admin.action(description="Fechar comandas selecionadas (baixa o estoque)")
+    @admin.action(permissions=["change"], description="Fechar comandas selecionadas (baixa o estoque)")
     def fechar_comandas(self, request, queryset):
         fechadas = 0
         for comanda in queryset.filter(status=Comanda.Status.ABERTA):
@@ -466,7 +466,7 @@ class ComandaAdmin(admin.ModelAdmin):
         if fechadas:
             self.message_user(request, f"{fechadas} comanda(s) fechada(s).", messages.SUCCESS)
 
-    @admin.action(description="Cancelar comandas selecionadas")
+    @admin.action(permissions=["change"], description="Cancelar comandas selecionadas")
     def cancelar_comandas(self, request, queryset):
         canceladas = 0
         for comanda in queryset.filter(status=Comanda.Status.ABERTA):
@@ -526,18 +526,18 @@ class ItemPedidoAdmin(admin.ModelAdmin):
         rotulo = ItemPedido.Status(status).label.lower()
         self.message_user(request, f"{total} item(ns) marcado(s) como {rotulo}.", messages.SUCCESS)
 
-    @admin.action(description="Marcar como em preparo")
+    @admin.action(permissions=["change"], description="Marcar como em preparo")
     def marcar_em_preparo(self, request, queryset):
         self._mudar_status(request, queryset, ItemPedido.Status.EM_PREPARO)
 
-    @admin.action(description="Marcar como pronto")
+    @admin.action(permissions=["change"], description="Marcar como pronto")
     def marcar_pronto(self, request, queryset):
         self._mudar_status(request, queryset, ItemPedido.Status.PRONTO)
 
-    @admin.action(description="Marcar como entregue")
+    @admin.action(permissions=["change"], description="Marcar como entregue")
     def marcar_entregue(self, request, queryset):
         self._mudar_status(request, queryset, ItemPedido.Status.ENTREGUE)
 
-    @admin.action(description="Cancelar itens")
+    @admin.action(permissions=["change"], description="Cancelar itens")
     def marcar_cancelado(self, request, queryset):
         self._mudar_status(request, queryset, ItemPedido.Status.CANCELADO)

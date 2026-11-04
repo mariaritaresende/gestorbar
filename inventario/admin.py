@@ -204,7 +204,7 @@ class InsumoAdmin(admin.ModelAdmin):
         return obj.valor_em_estoque
 
     # --- Ações em massa ---------------------------------------------------
-    @admin.action(description="Baixar insumos vencidos como perda")
+    @admin.action(permissions=["change"], description="Baixar insumos vencidos como perda")
     def baixar_vencidos_como_perda(self, request, queryset):
         baixados = 0
         for insumo in queryset.vencidos().filter(quantidade_estoque__gt=0):
@@ -233,11 +233,11 @@ class InsumoAdmin(admin.ModelAdmin):
         else:
             self.message_user(request, "Nenhum insumo selecionado precisa de reposição.")
 
-    @admin.action(description="Ativar insumos selecionados")
+    @admin.action(permissions=["change"], description="Ativar insumos selecionados")
     def ativar(self, request, queryset):
         self.message_user(request, f"{queryset.update(ativo=True)} insumo(s) ativado(s).")
 
-    @admin.action(description="Desativar insumos selecionados")
+    @admin.action(permissions=["change"], description="Desativar insumos selecionados")
     def desativar(self, request, queryset):
         self.message_user(request, f"{queryset.update(ativo=False)} insumo(s) desativado(s).")
 

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="GestorBar">
+  <!-- Logo do GestorBar: copo de drinque com rodela de limão sobre fundo âmbar -->
+  <circle cx="64" cy="64" r="62" fill="#F2A900"/>
+  <circle cx="64" cy="64" r="55" fill="none" stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="2"/>
+  <!-- rodela de limão -->
+  <circle cx="86" cy="38" r="13" fill="#FFFFFF"/>
+  <circle cx="86" cy="38" r="10" fill="#9BCB3C"/>
+  <path d="M86 28v20M76 38h20M79 31l14 14M93 31L79 45" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- taça -->
+  <path d="M30 40h68L66 74v22" fill="none" stroke="#24272B" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M30 40L62 74" fill="none" stroke="#24272B" stroke-width="7" stroke-linecap="round"/>
+  <!-- bebida -->
+  <path d="M41 51h46L64 75z" fill="#24272B"/>
+  <!-- base -->
+  <path d="M48 98h36" stroke="#24272B" stroke-width="7" stroke-linecap="round"/>
+</svg>
