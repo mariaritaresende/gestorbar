@@ -1,0 +1,189 @@
+// Diagrama entidade-relacionamento do GestorBar.
+// Gerar a imagem:  dot -Tpng -Gdpi=150 docs/modelagem.dot -o docs/modelagem.png
+digraph modelagem {
+    graph [rankdir=LR, splines=spline, nodesep=0.45, ranksep=1.1, pad=0.4,
+           fontname="Helvetica", bgcolor="white", newrank=true];
+    node  [shape=plain, fontname="Helvetica", fontsize=11];
+    edge  [dir=both, color="#4A4F57", penwidth=1.3, arrowsize=0.9,
+           fontname="Helvetica", fontsize=12, fontcolor="#1F2328"];
+
+    // ---------------------------------------------------------------- contas
+    subgraph cluster_contas {
+        label=<<b>app contas</b>>; fontsize=14; style="rounded,filled";
+        color="#E3B341"; fillcolor="#FFF8E6"; margin=16;
+
+        user [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#B8891F">
+<tr><td colspan="3" bgcolor="#F2A900"><b>Usuário</b> (auth_user, do Django)</td></tr>
+<tr><td port="pk">PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td></td><td align="left">username</td><td align="left">texto</td></tr>
+<tr><td></td><td align="left">first_name</td><td align="left">texto</td></tr>
+<tr><td></td><td align="left">email</td><td align="left">e-mail</td></tr>
+<tr><td></td><td align="left">is_staff</td><td align="left">booleano</td></tr>
+</table>>];
+
+        perfil [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#B8891F">
+<tr><td colspan="3" bgcolor="#F2A900"><b>Perfil</b></td></tr>
+<tr><td>PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td>FK</td><td align="left">usuario_id</td><td align="left" port="usuario">único</td></tr>
+<tr><td></td><td align="left">tipo</td><td align="left">gerente | garçom | cozinha | cliente</td></tr>
+<tr><td></td><td align="left">telefone</td><td align="left">texto</td></tr>
+</table>>];
+    }
+
+    // ------------------------------------------------------------ inventario
+    subgraph cluster_inventario {
+        label=<<b>app inventario</b>>; labelloc="b"; fontsize=14; style="rounded,filled";
+        color="#8DB64A"; fillcolor="#F3F9EA"; margin=16;
+
+        categoria_insumo [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#6E9A2C">
+<tr><td colspan="3" bgcolor="#B9DB82"><b>CategoriaInsumo</b></td></tr>
+<tr><td port="pk">PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td></td><td align="left">nome</td><td align="left">texto único</td></tr>
+</table>>];
+
+        fornecedor [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#6E9A2C">
+<tr><td colspan="3" bgcolor="#B9DB82"><b>Fornecedor</b></td></tr>
+<tr><td port="pk">PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td></td><td align="left">nome</td><td align="left">texto</td></tr>
+<tr><td></td><td align="left">cnpj</td><td align="left">texto único</td></tr>
+<tr><td></td><td align="left">telefone, email</td><td align="left">texto</td></tr>
+</table>>];
+
+        insumo [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#6E9A2C">
+<tr><td colspan="3" bgcolor="#B9DB82"><b>Insumo</b> (bebida ou ingrediente)</td></tr>
+<tr><td port="pk">PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td>FK</td><td align="left">categoria_id</td><td align="left" port="categoria">obrigatório</td></tr>
+<tr><td>FK</td><td align="left">fornecedor_id</td><td align="left" port="fornecedor">opcional</td></tr>
+<tr><td></td><td align="left">nome</td><td align="left">texto único</td></tr>
+<tr><td></td><td align="left">unidade</td><td align="left">un | kg | g | l | ml | cx</td></tr>
+<tr><td></td><td align="left">quantidade_estoque</td><td align="left">decimal ≥ 0</td></tr>
+<tr><td></td><td align="left">estoque_minimo</td><td align="left">decimal ≥ 0</td></tr>
+<tr><td></td><td align="left">custo_unitario</td><td align="left">decimal (médio)</td></tr>
+<tr><td></td><td align="left">validade</td><td align="left">data</td></tr>
+</table>>];
+
+        movimentacao [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#6E9A2C">
+<tr><td colspan="3" bgcolor="#B9DB82"><b>MovimentacaoEstoque</b></td></tr>
+<tr><td>PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td>FK</td><td align="left">insumo_id</td><td align="left" port="insumo">obrigatório</td></tr>
+<tr><td>FK</td><td align="left">usuario_id</td><td align="left" port="usuario">quem registrou</td></tr>
+<tr><td></td><td align="left">tipo</td><td align="left">entrada | saída | perda</td></tr>
+<tr><td></td><td align="left">quantidade</td><td align="left">decimal &gt; 0</td></tr>
+<tr><td></td><td align="left">custo_unitario</td><td align="left">decimal</td></tr>
+<tr><td></td><td align="left">saldo_apos</td><td align="left">decimal</td></tr>
+<tr><td></td><td align="left">data</td><td align="left">data e hora</td></tr>
+</table>>];
+    }
+
+    // --------------------------------------------------------------- pedidos
+    subgraph cluster_pedidos {
+        label=<<b>app pedidos</b>>; fontsize=14; style="rounded,filled";
+        color="#6C9BD2"; fillcolor="#EEF4FB"; margin=16;
+
+        categoria_cardapio [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#3F6FA8">
+<tr><td colspan="3" bgcolor="#A9C8EC"><b>CategoriaCardapio</b></td></tr>
+<tr><td port="pk">PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td></td><td align="left">nome</td><td align="left">texto único</td></tr>
+<tr><td></td><td align="left">ordem</td><td align="left">int</td></tr>
+</table>>];
+
+        item_cardapio [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#3F6FA8">
+<tr><td colspan="3" bgcolor="#A9C8EC"><b>ItemCardapio</b></td></tr>
+<tr><td port="pk">PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td>FK</td><td align="left">categoria_id</td><td align="left" port="categoria">obrigatório</td></tr>
+<tr><td></td><td align="left">nome</td><td align="left">texto único</td></tr>
+<tr><td></td><td align="left">preco</td><td align="left">decimal</td></tr>
+<tr><td></td><td align="left">tempo_preparo</td><td align="left">minutos</td></tr>
+<tr><td></td><td align="left">disponivel</td><td align="left">booleano</td></tr>
+</table>>];
+
+        ficha [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#3F6FA8">
+<tr><td colspan="3" bgcolor="#A9C8EC"><b>FichaTecnica</b> (tabela da relação N:N)</td></tr>
+<tr><td>PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td>FK</td><td align="left">item_id</td><td align="left" port="item">par (item, insumo)</td></tr>
+<tr><td>FK</td><td align="left">insumo_id</td><td align="left" port="insumo">é único</td></tr>
+<tr><td></td><td align="left">quantidade</td><td align="left">por porção</td></tr>
+</table>>];
+
+        mesa [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#3F6FA8">
+<tr><td colspan="3" bgcolor="#A9C8EC"><b>Mesa</b></td></tr>
+<tr><td port="pk">PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td></td><td align="left">numero</td><td align="left">int único</td></tr>
+<tr><td></td><td align="left">capacidade</td><td align="left">int</td></tr>
+<tr><td></td><td align="left">area</td><td align="left">salão | varanda | balcão | externa</td></tr>
+<tr><td></td><td align="left">status</td><td align="left">livre | ocupada | reservada | manutenção</td></tr>
+</table>>];
+
+        reserva [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#3F6FA8">
+<tr><td colspan="3" bgcolor="#A9C8EC"><b>Reserva</b></td></tr>
+<tr><td>PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td>FK</td><td align="left">cliente_id</td><td align="left" port="cliente">obrigatório</td></tr>
+<tr><td>FK</td><td align="left">mesa_id</td><td align="left" port="mesa">opcional</td></tr>
+<tr><td></td><td align="left">data_hora</td><td align="left">data e hora</td></tr>
+<tr><td></td><td align="left">pessoas</td><td align="left">int</td></tr>
+<tr><td></td><td align="left">status</td><td align="left">pendente | confirmada | …</td></tr>
+</table>>];
+
+        comanda [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#3F6FA8">
+<tr><td colspan="3" bgcolor="#A9C8EC"><b>Comanda</b></td></tr>
+<tr><td port="pk">PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td>FK</td><td align="left">mesa_id</td><td align="left" port="mesa">1 aberta por mesa</td></tr>
+<tr><td>FK</td><td align="left">garcom_id</td><td align="left" port="garcom">opcional</td></tr>
+<tr><td>FK</td><td align="left">cliente_id</td><td align="left" port="cliente">opcional</td></tr>
+<tr><td></td><td align="left">status</td><td align="left">aberta | fechada | cancelada</td></tr>
+<tr><td></td><td align="left">desconto</td><td align="left">decimal</td></tr>
+<tr><td></td><td align="left">forma_pagamento</td><td align="left">pix | crédito | …</td></tr>
+<tr><td></td><td align="left">aberta_em, fechada_em</td><td align="left">data e hora</td></tr>
+</table>>];
+
+        item_pedido [label=<
+<table border="0" cellborder="1" cellspacing="0" cellpadding="5" bgcolor="white" color="#3F6FA8">
+<tr><td colspan="3" bgcolor="#A9C8EC"><b>ItemPedido</b></td></tr>
+<tr><td>PK</td><td align="left">id</td><td align="left">int</td></tr>
+<tr><td>FK</td><td align="left">comanda_id</td><td align="left" port="comanda">obrigatório</td></tr>
+<tr><td>FK</td><td align="left">item_id</td><td align="left" port="item">obrigatório</td></tr>
+<tr><td></td><td align="left">quantidade</td><td align="left">int</td></tr>
+<tr><td></td><td align="left">preco_unitario</td><td align="left">decimal (copiado)</td></tr>
+<tr><td></td><td align="left">status</td><td align="left">pendente | em preparo | pronto | …</td></tr>
+</table>>];
+    }
+
+    // ---------------------------------------------------------- relações
+    // Ponta "pé de galinha" = muitos; traço = um; círculo = opcional.
+    perfil:usuario:e       -> user:pk:w               [arrowtail=teetee,   arrowhead=teetee,  label=<<b>1:1</b>>];
+    insumo:categoria:e     -> categoria_insumo:pk:w   [arrowtail=crowodot, arrowhead=teetee, label=<<b>1:N</b>>];
+    insumo:fornecedor:e    -> fornecedor:pk:w         [arrowtail=crowodot, arrowhead=teeodot, label=<<b>1:N</b>>];
+    movimentacao:insumo:e  -> insumo:pk:w             [arrowtail=crowodot, arrowhead=teetee, label=<<b>1:N</b>>];
+    movimentacao:usuario:e -> user:pk:w               [arrowtail=crowodot, arrowhead=teeodot, label=<<b>1:N</b>>];
+    item_cardapio:categoria:e -> categoria_cardapio:pk:w [arrowtail=crowodot, arrowhead=teetee, label=<<b>1:N</b>>];
+    ficha:item:e           -> item_cardapio:pk:w      [arrowtail=crowodot, arrowhead=teetee, label=<<b>1:N</b>>];
+    ficha:insumo:e         -> insumo:pk:w             [arrowtail=crowodot, arrowhead=teetee, color="#2F7D32", penwidth=1.8, label=<<b>1:N</b>>];
+    comanda:mesa:e         -> mesa:pk:w               [arrowtail=crowodot, arrowhead=teetee, label=<<b>1:N</b>>];
+    comanda:garcom:e       -> user:pk:w               [arrowtail=crowodot, arrowhead=teeodot, label=<<b>garçom 1:N</b>>];
+    comanda:cliente:e      -> user:pk:w               [arrowtail=crowodot, arrowhead=teeodot, label=<<b>cliente 1:N</b>>];
+    item_pedido:comanda:e  -> comanda:pk:w            [arrowtail=crowodot, arrowhead=teetee, label=<<b>1:N</b>>];
+    item_pedido:item:e     -> item_cardapio:pk:w      [arrowtail=crowodot, arrowhead=teetee, label=<<b>1:N</b>>];
+    reserva:cliente:e      -> user:pk:w               [arrowtail=crowodot, arrowhead=teetee, label=<<b>1:N</b>>];
+    reserva:mesa:e         -> mesa:pk:w               [arrowtail=crowodot, arrowhead=teeodot, label=<<b>1:N</b>>];
+
+    legenda [label=<
+<table border="0" cellborder="0" cellspacing="0" cellpadding="4" bgcolor="white" color="#999999" style="rounded">
+<tr><td align="left"><b>Cardinalidades</b></td></tr>
+<tr><td align="left">1:1  Usuário tem exatamente um Perfil</td></tr>
+<tr><td align="left">1:N  um registro do lado "1" se liga a vários do lado "N" (ex.: uma Mesa tem várias Comandas)</td></tr>
+<tr><td align="left">N:N  ItemCardapio × Insumo, pela tabela FichaTecnica (um prato usa vários insumos; um insumo está em vários pratos)</td></tr>
+<tr><td align="left">PK = chave primária · FK = chave estrangeira</td></tr>
+</table>>];
+}
