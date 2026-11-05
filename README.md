@@ -105,90 +105,26 @@ Criados por `popular_dados`, todos com a senha `senha123`:
 
 ## Modelagem do banco de dados
 
-```mermaid
-erDiagram
-    USER ||--|| PERFIL : possui
-    USER ||--o{ COMANDA : "atende (garçom)"
-    USER ||--o{ COMANDA : "consome (cliente)"
-    USER ||--o{ RESERVA : faz
-    USER ||--o{ MOVIMENTACAO_ESTOQUE : registra
+![Diagrama entidade-relacionamento do GestorBar](docs/modelagem.png)
 
-    FORNECEDOR ||--o{ INSUMO : fornece
-    CATEGORIA_INSUMO ||--o{ INSUMO : agrupa
-    INSUMO ||--o{ MOVIMENTACAO_ESTOQUE : movimenta
-    INSUMO ||--o{ FICHA_TECNICA : compoe
+Como ler o diagrama:
 
-    CATEGORIA_CARDAPIO ||--o{ ITEM_CARDAPIO : agrupa
-    ITEM_CARDAPIO ||--o{ FICHA_TECNICA : "é feito de"
-    ITEM_CARDAPIO ||--o{ ITEM_PEDIDO : "é pedido em"
+- As tabelas estão agrupadas pelo app a que pertencem (`contas`, `inventario` e `pedidos`).
+- Cada linha liga uma chave estrangeira (FK) à chave primária (PK) da tabela relacionada e traz escrita a cardinalidade.
+- **1:1:** `Usuário` e `Perfil` (cada usuário tem exatamente um perfil).
+- **1:N:** as demais ligações. Exemplos: uma `Mesa` tem várias `Comanda`s; uma `Comanda` tem vários `ItemPedido`s; um `Insumo` tem várias `MovimentacaoEstoque`s.
+- **N:N:** `ItemCardapio` e `Insumo`, por meio da tabela `FichaTecnica` (um prato usa vários insumos, e um insumo está em vários pratos).
+- Nas pontas das linhas, o "pé de galinha" indica o lado "muitos", o traço duplo o lado "um" e o círculo que a relação é opcional.
+- A linha verde é a ligação entre os apps `pedidos` e `inventario`: a ficha técnica diz quanto de cada insumo vai em uma porção, e é ela que permite dar baixa no estoque quando a comanda é fechada.
 
-    MESA ||--o{ COMANDA : recebe
-    MESA ||--o{ RESERVA : "é reservada em"
-    COMANDA ||--o{ ITEM_PEDIDO : contem
-
-    PERFIL {
-        string tipo "GERENTE | GARCOM | COZINHA | CLIENTE"
-        string telefone
-    }
-    INSUMO {
-        string nome
-        string unidade
-        decimal quantidade_estoque
-        decimal estoque_minimo
-        decimal custo_unitario
-        date validade
-    }
-    MOVIMENTACAO_ESTOQUE {
-        string tipo "ENTRADA | SAIDA | PERDA"
-        decimal quantidade
-        decimal custo_unitario
-        date validade
-        decimal saldo_apos
-        datetime data
-    }
-    ITEM_CARDAPIO {
-        string nome
-        decimal preco
-        int tempo_preparo
-        bool disponivel
-    }
-    FICHA_TECNICA {
-        decimal quantidade
-    }
-    MESA {
-        int numero
-        int capacidade
-        string area
-        string status
-    }
-    COMANDA {
-        string status "ABERTA | FECHADA | CANCELADA"
-        bool cobrar_taxa_servico
-        decimal desconto
-        string forma_pagamento
-        datetime aberta_em
-        datetime fechada_em
-    }
-    ITEM_PEDIDO {
-        int quantidade
-        decimal preco_unitario
-        string status
-        string observacao
-    }
-    RESERVA {
-        datetime data_hora
-        int pessoas
-        string status
-    }
-```
-
-`ITEM_CARDAPIO` e `INSUMO` têm uma relação muitos-para-muitos através de `FICHA_TECNICA`, que guarda quanto de cada insumo vai em uma porção.
+O código-fonte do diagrama está em `docs/modelagem.dot` (Graphviz).
 
 ## Estrutura do projeto
 
 ```
 .
 ├── config/                 # configurações, URLs, WSGI/ASGI
+├── docs/                   # diagrama do banco (modelagem.png e modelagem.dot)
 ├── contas/                 # app de perfis de usuário
 │   ├── management/commands/configurar_perfis.py
 │   ├── admin.py  models.py  signals.py  tests.py
