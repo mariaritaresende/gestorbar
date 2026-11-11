@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block titulo %}Criar conta | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-7">
+      <h1 class="gb-titulo mb-1">Criar conta</h1>
+      <p class="text-body-secondary mb-4">Com a conta você faz reservas e acompanha suas contas e pedidos.</p>
+
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include "partials/erros_form.html" %}
+
+            <div class="row">
+              <div class="col-sm-6">{% include "partials/campo.html" with campo=form.first_name %}</div>
+              <div class="col-sm-6">{% include "partials/campo.html" with campo=form.last_name %}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-7">{% include "partials/campo.html" with campo=form.email %}</div>
+              <div class="col-sm-5">{% include "partials/campo.html" with campo=form.telefone %}</div>
+            </div>
+
+            <hr class="my-3">
+            {% include "partials/campo.html" with campo=form.username %}
+            <div class="row">
+              <div class="col-sm-6">{% include "partials/campo.html" with campo=form.password1 %}</div>
+              <div class="col-sm-6">{% include "partials/campo.html" with campo=form.password2 %}</div>
+            </div>
+
+            <div class="d-grid mt-2">
+              <button type="submit" class="btn btn-warning fw-semibold">Criar conta</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <p class="mt-4">Já tem conta? <a href="{% url 'contas:entrar' %}">Entrar</a>.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

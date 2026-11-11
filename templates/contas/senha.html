@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block titulo %}Trocar senha | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-4">
+  <h1 class="gb-titulo mb-3">Trocar senha</h1>
+  {% include "partials/menu_cliente.html" %}
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include "partials/erros_form.html" %}
+            {% include "partials/campo.html" with campo=form.old_password %}
+            {% include "partials/campo.html" with campo=form.new_password1 %}
+            {% include "partials/campo.html" with campo=form.new_password2 %}
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-warning fw-semibold">Trocar senha</button>
+              <a class="btn btn-outline-secondary" href="{% url 'contas:perfil' %}">Voltar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

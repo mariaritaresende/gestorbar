@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block titulo %}Entrar | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-sm-10 col-md-7 col-lg-5">
+      <h1 class="gb-titulo mb-1">Entrar</h1>
+      <p class="text-body-secondary mb-4">Acesse suas reservas e suas contas no bar.</p>
+
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include "partials/erros_form.html" %}
+            {% include "partials/campo.html" with campo=form.username %}
+            {% include "partials/campo.html" with campo=form.password %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <div class="d-grid">
+              <button type="submit" class="btn btn-warning fw-semibold">Entrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <p class="mt-4 mb-1">Ainda não tem conta? <a href="{% url 'contas:cadastro' %}">Cadastre-se</a>.</p>
+      <p class="small text-body-secondary">É da equipe do bar? Entre pelo <a href="{% url 'admin:login' %}">painel da equipe</a>.</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
