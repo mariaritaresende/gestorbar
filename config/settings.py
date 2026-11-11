@@ -99,7 +99,14 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_URL = "admin:login"
+# Login do site (clientes). O painel da equipe tem o próprio login em /admin/.
+LOGIN_URL = "contas:entrar"
+LOGOUT_REDIRECT_URL = "home"
+
+# As mensagens de erro usam a cor "danger" do Bootstrap.
+from django.contrib.messages import constants as mensagens  # noqa: E402
+
+MESSAGE_TAGS = {mensagens.ERROR: "danger"}
 
 # ---------------------------------------------------------------------------
 # Tema do painel administrativo (Jazzmin)
