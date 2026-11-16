@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load site_pedidos %}
+
+{% block titulo %}Minhas contas | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-4">
+  <h1 class="gb-titulo mb-3">Minhas contas</h1>
+  {% include "partials/menu_cliente.html" %}
+
+  {% if comandas %}
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead>
+          <tr><th>Comanda</th><th>Data</th><th>Mesa</th><th>Situação</th><th class="text-end">Total</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for comanda in comandas %}
+            <tr>
+              <td>#{{ comanda.pk }}</td>
+              <td>{{ comanda.aberta_em|date:"d/m/Y H:i" }}</td>
+              <td>{{ comanda.mesa }}</td>
+              <td><span class="badge text-bg-{{ comanda.status|cor_status }}">{{ comanda.get_status_display }}</span></td>
+              <td class="text-end">{{ comanda.total|reais }}</td>
+              <td class="text-end"><a href="{% url 'pedidos:comanda' comanda.pk %}">Detalhes</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    {% if is_paginated %}
+      <nav aria-label="Páginas">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}<li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>{% endif %}
+          <li class="page-item disabled"><span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span></li>
+          {% if page_obj.has_next %}<li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a></li>{% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  {% else %}
+    <div class="card card-body">
+      <p class="mb-0">Você ainda não tem contas. Quando o garçom abrir uma comanda no seu nome, ela aparece aqui.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load site_pedidos %}
+
+{% block titulo %}Comanda #{{ comanda.pk }} | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-4">
+  <h1 class="gb-titulo mb-3">Comanda #{{ comanda.pk }}</h1>
+  {% include "partials/menu_cliente.html" %}
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <div class="d-flex flex-wrap justify-content-between gap-2 mb-3">
+            <div>
+              <div class="fw-semibold">{{ comanda.mesa }}</div>
+              <div class="small text-body-secondary">
+                Aberta em {{ comanda.aberta_em|date:"d/m/Y H:i" }}
+                {% if comanda.fechada_em %}· fechada às {{ comanda.fechada_em|time:"H:i" }}{% endif %}
+              </div>
+            </div>
+            <span class="badge text-bg-{{ comanda.status|cor_status }} align-self-start">{{ comanda.get_status_display }}</span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table align-middle mb-0">
+              <thead>
+                <tr><th>Item</th>{% if comanda.status == "ABERTA" %}<th>Andamento</th>{% endif %}<th class="text-end">Preço</th><th class="text-end">Subtotal</th></tr>
+              </thead>
+              <tbody>
+                {% for pedido in itens %}
+                  <tr class="{% if pedido.status == 'CANCELADO' %}text-body-secondary text-decoration-line-through{% endif %}">
+                    <td>
+                      {{ pedido.quantidade }}× {{ pedido.item.nome }}
+                      {% if pedido.observacao %}<div class="small text-body-secondary">{{ pedido.observacao }}</div>{% endif %}
+                    </td>
+                    {% if comanda.status == "ABERTA" %}
+                      <td><span class="badge text-bg-{{ pedido.status|cor_status }}">{{ pedido.get_status_display }}</span></td>
+                    {% endif %}
+                    <td class="text-end">{{ pedido.preco_unitario|reais }}</td>
+                    <td class="text-end">{{ pedido.subtotal|reais }}</td>
+                  </tr>
+                {% empty %}
+                  <tr><td colspan="4" class="text-body-secondary">Nenhum item.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h2 class="h5">{% if comanda.status == "ABERTA" %}Total parcial{% else %}Resumo{% endif %}</h2>
+          <dl class="row mb-0">
+            <dt class="col-7 fw-normal">Subtotal</dt><dd class="col-5 text-end">{{ comanda.subtotal|reais }}</dd>
+            <dt class="col-7 fw-normal">Taxa de serviço</dt><dd class="col-5 text-end">{{ comanda.taxa_servico|reais }}</dd>
+            {% if comanda.desconto %}
+              <dt class="col-7 fw-normal">Desconto</dt><dd class="col-5 text-end">− {{ comanda.desconto|reais }}</dd>
+            {% endif %}
+            <dt class="col-7 border-top pt-2">Total</dt><dd class="col-5 text-end border-top pt-2 fw-bold">{{ comanda.total|reais }}</dd>
+          </dl>
+          {% if comanda.forma_pagamento %}
+            <p class="small text-body-secondary mt-3 mb-0">Pago com {{ comanda.get_forma_pagamento_display|lower }}.</p>
+          {% endif %}
+        </div>
+      </div>
+      <a class="btn btn-link px-0 mt-2" href="{% url 'pedidos:comandas' %}">Voltar para minhas contas</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
