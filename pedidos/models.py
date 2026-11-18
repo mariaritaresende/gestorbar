@@ -200,6 +200,15 @@ class Reserva(models.Model):
             return f"Reserva de {self.cliente}"
         return f"Reserva de {self.cliente} — {timezone.localtime(self.data_hora):%d/%m %H:%M}"
 
+    @property
+    def pode_alterar(self):
+        """O cliente só edita ou cancela reservas ativas que ainda não aconteceram."""
+        return (
+            self.status in self.STATUS_ATIVOS
+            and self.data_hora is not None
+            and self.data_hora > timezone.now()
+        )
+
     def clean(self):
         erros = {}
         if self.mesa_id and self.pessoas and self.pessoas > self.mesa.capacidade:
