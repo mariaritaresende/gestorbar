@@ -1,6 +1,7 @@
 """Telas do site para o cliente, separadas por assunto."""
 from .cardapio import CardapioView
 from .comandas import ComandaDetailView, ComandaListView
+from .minha_area import MinhaAreaView
 from .reservas import (
     ReservaCancelarView,
     ReservaCreateView,
@@ -12,6 +13,7 @@ __all__ = [
     "CardapioView",
     "ComandaDetailView",
     "ComandaListView",
+    "MinhaAreaView",
     "ReservaCancelarView",
     "ReservaCreateView",
     "ReservaListView",

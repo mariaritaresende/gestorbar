@@ -6,6 +6,7 @@ app_name = "pedidos"
 
 urlpatterns = [
     path("cardapio/", views.CardapioView.as_view(), name="cardapio"),
+    path("minha-area/", views.MinhaAreaView.as_view(), name="minha_area"),
     path("minha-area/reservas/", views.ReservaListView.as_view(), name="reservas"),
     path("minha-area/reservas/nova/", views.ReservaCreateView.as_view(), name="reserva_nova"),
     path("minha-area/reservas/<int:pk>/editar/", views.ReservaUpdateView.as_view(), name="reserva_editar"),
