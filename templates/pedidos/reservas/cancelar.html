@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block titulo %}Cancelar reserva | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-4">
+  <h1 class="gb-titulo mb-3">Cancelar reserva</h1>
+  {% include "partials/menu_cliente.html" %}
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card shadow-sm border-danger-subtle">
+        <div class="card-body p-4">
+          <p class="mb-1">Você vai cancelar a reserva de</p>
+          <p class="gb-titulo h4">{{ reserva.data_hora|date:"d/m/Y" }} às {{ reserva.data_hora|time:"H:i" }}, {{ reserva.pessoas }} pessoa{{ reserva.pessoas|pluralize }}.</p>
+          <p class="text-body-secondary">A mesa fica livre para outros clientes. Para voltar, será preciso fazer uma nova reserva.</p>
+          <form method="post" class="d-flex gap-2">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Cancelar reserva</button>
+            <a class="btn btn-outline-secondary" href="{% url 'pedidos:reservas' %}">Manter reserva</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

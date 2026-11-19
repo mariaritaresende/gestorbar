@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load site_pedidos %}
+
+{% block titulo %}Cardápio | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-4">
+  <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
+    <div>
+      <h1 class="gb-titulo mb-1">Cardápio</h1>
+      <p class="text-body-secondary mb-0">Pratos, petiscos e bebidas da casa. Os itens sem estoque aparecem como esgotados.</p>
+    </div>
+    <form class="d-flex gap-2" method="get" role="search">
+      {% if categoria_atual %}<input type="hidden" name="categoria" value="{{ categoria_atual }}">{% endif %}
+      <label class="visually-hidden" for="busca">Buscar no cardápio</label>
+      <input id="busca" class="form-control" type="search" name="q" value="{{ busca }}" placeholder="Buscar prato ou bebida">
+      <button class="btn btn-outline-secondary" type="submit"><i class="bi bi-search"></i><span class="visually-hidden">Buscar</span></button>
+    </form>
+  </div>
+
+  <nav class="mb-4" aria-label="Categorias">
+    <ul class="nav nav-pills flex-nowrap overflow-auto gap-1">
+      <li class="nav-item">
+        <a class="nav-link {% if not categoria_atual %}active{% endif %}" href="?{% if busca %}q={{ busca|urlencode }}{% endif %}">Tudo</a>
+      </li>
+      {% for categoria in categorias %}
+        <li class="nav-item">
+          <a class="nav-link text-nowrap {% if categoria.pk == categoria_atual %}active{% endif %}"
+             href="?categoria={{ categoria.pk }}{% if busca %}&q={{ busca|urlencode }}{% endif %}">{{ categoria.nome }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  {% for categoria, itens in grupos %}
+    <section class="mb-4" aria-labelledby="cat-{{ categoria.pk }}">
+      <h2 id="cat-{{ categoria.pk }}" class="gb-titulo h4 border-bottom pb-2">{{ categoria.nome }}</h2>
+      <div class="row row-cols-1 row-cols-lg-2 g-0 gx-lg-5">
+        {% for item in itens %}
+          <div class="col">
+            <div class="gb-item d-flex gap-3 py-3 border-bottom {% if item.esgotado %}gb-item--esgotado{% endif %}">
+              <img class="gb-item__foto" src="{{ item|imagem_item }}" alt="{{ item.nome }}" width="120" height="90" loading="lazy">
+              <div class="flex-grow-1">
+                <h3 class="h6 mb-1">
+                  {{ item.nome }}
+                  {% if item.destaque %}<span class="badge text-bg-warning ms-1">Destaque</span>{% endif %}
+                  {% if item.esgotado %}<span class="badge text-bg-secondary ms-1">Esgotado</span>{% endif %}
+                </h3>
+                {% if item.descricao %}<p class="small text-body-secondary mb-1">{{ item.descricao }}</p>{% endif %}
+                {% if item.tempo_preparo %}<p class="small text-body-secondary mb-0"><i class="bi bi-clock"></i> cerca de {{ item.tempo_preparo }} min</p>{% endif %}
+              </div>
+              <div class="fw-semibold text-nowrap">{{ item.preco|reais }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+  {% empty %}
+    <div class="text-center py-5">
+      <p class="mb-2">Nenhum item encontrado{% if busca %} para "{{ busca }}"{% endif %}.</p>
+      <a class="btn btn-outline-secondary" href="{% url 'pedidos:cardapio' %}">Ver o cardápio completo</a>
+    </div>
+  {% endfor %}
+
+  {% if not user.is_authenticated %}
+    <div class="gb-chamada rounded-3 p-4 mt-4 d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <p class="mb-0 fw-semibold">Quer garantir sua mesa? Crie uma conta e faça sua reserva.</p>
+      <a class="btn btn-warning fw-semibold" href="{% url 'contas:cadastro' %}">Criar conta</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

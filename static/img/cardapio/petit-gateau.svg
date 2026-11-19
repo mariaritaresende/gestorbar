@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Petit gâteau">
+  <rect width="320" height="240" rx="18" fill="#F6DCDC"/>
+  <ellipse cx="160" cy="184" rx="120" ry="32" fill="#000" opacity="0.08"/>
+  <ellipse cx="160" cy="178" rx="120" ry="32" fill="#FFFFFF" stroke="#E2D6C3" stroke-width="3"/>
+  <ellipse cx="160" cy="175" rx="94" ry="22" fill="#F7F1E6"/>
+  <path d="M94 168 v-42 q0 -24 40 -24 q40 0 40 24 v42 q-40 10 -80 0z" fill="#5A2E1C"/>
+  <ellipse cx="134" cy="126" rx="40" ry="14" fill="#6E3A24"/>
+  <path d="M110 122 q8 34 -2 54 q10 6 16 -2 q-6 -24 4 -48z" fill="#3B1A0E"/>
+  <path d="M150 128 q10 28 2 44 q8 4 12 -2 q-4 -20 2 -40z" fill="#3B1A0E"/>
+  <circle cx="208" cy="150" r="30" fill="#FFF6DF" stroke="#E9D9AF" stroke-width="3"/>
+  <path d="M184 156 q8 10 24 10 q16 0 24 -10" stroke="#E9D9AF" stroke-width="3" fill="none"/>
+  <g fill="#2B1A12"><circle cx="200" cy="140" r="2"/><circle cx="214" cy="146" r="2"/><circle cx="206" cy="154" r="2"/></g>
+  <g fill="#4E9A3A"><ellipse cx="142" cy="108" rx="11" ry="5" transform="rotate(-25 142 108)"/><ellipse cx="128" cy="108" rx="11" ry="5" transform="rotate(25 128 108)"/></g>
+</svg>

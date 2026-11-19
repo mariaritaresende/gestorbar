@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Picanha na chapa">
+  <rect width="320" height="240" rx="18" fill="#FBEBC8"/>
+  <rect x="56" y="98" width="208" height="112" rx="16" fill="#2F2B2A"/>
+  <rect x="66" y="106" width="188" height="96" rx="12" fill="#454040"/>
+  <rect x="264" y="140" width="34" height="14" rx="6" fill="#6B4A2F"/>
+  <g transform="translate(92 118) rotate(-8)">
+    <path d="M0 0 h58 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-58 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10z" fill="#B5543C"/>
+    <path d="M2 4 h54 a8 8 0 0 1 8 8 v4 h-70 v-4 a8 8 0 0 1 8 -8z" fill="#F4E3CF"/>
+    <path d="M6 22 h52" stroke="#8E3A27" stroke-width="3" stroke-linecap="round"/>
+  </g><g transform="translate(150 112) rotate(4)">
+    <path d="M0 0 h58 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-58 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10z" fill="#B5543C"/>
+    <path d="M2 4 h54 a8 8 0 0 1 8 8 v4 h-70 v-4 a8 8 0 0 1 8 -8z" fill="#F4E3CF"/>
+    <path d="M6 22 h52" stroke="#8E3A27" stroke-width="3" stroke-linecap="round"/>
+  </g><g transform="translate(118 150) rotate(6)">
+    <path d="M0 0 h58 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-58 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10z" fill="#B5543C"/>
+    <path d="M2 4 h54 a8 8 0 0 1 8 8 v4 h-70 v-4 a8 8 0 0 1 8 -8z" fill="#F4E3CF"/>
+    <path d="M6 22 h52" stroke="#8E3A27" stroke-width="3" stroke-linecap="round"/>
+  </g><g transform="translate(178 146) rotate(-6)">
+    <path d="M0 0 h58 a10 10 0 0 1 10 10 v20 a10 10 0 0 1 -10 10 h-58 a10 10 0 0 1 -10 -10 v-20 a10 10 0 0 1 10 -10z" fill="#B5543C"/>
+    <path d="M2 4 h54 a8 8 0 0 1 8 8 v4 h-70 v-4 a8 8 0 0 1 8 -8z" fill="#F4E3CF"/>
+    <path d="M6 22 h52" stroke="#8E3A27" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g fill="#E8C27A"><circle cx="80" cy="190" r="2.5"/><circle cx="92" cy="184" r="2.5"/><circle cx="230" cy="118" r="2.5"/><circle cx="240" cy="126" r="2.5"/><circle cx="84" cy="124" r="2.5"/><circle cx="226" cy="192" r="2.5"/></g>
+</svg>

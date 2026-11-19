@@ -42,6 +42,12 @@ class ItemCardapio(models.Model):
 
     nome = models.CharField(max_length=100, unique=True)
     descricao = models.TextField("descrição", blank=True)
+    imagem = models.ImageField(
+        "foto",
+        upload_to="cardapio/",
+        blank=True,
+        help_text="Opcional. Sem foto, o site mostra uma ilustração do item.",
+    )
     categoria = models.ForeignKey(
         CategoriaCardapio, on_delete=models.PROTECT, related_name="itens"
     )
@@ -199,6 +205,15 @@ class Reserva(models.Model):
         if not self.data_hora:
             return f"Reserva de {self.cliente}"
         return f"Reserva de {self.cliente} — {timezone.localtime(self.data_hora):%d/%m %H:%M}"
+
+    @property
+    def pode_alterar(self):
+        """O cliente só edita ou cancela reservas ativas que ainda não aconteceram."""
+        return (
+            self.status in self.STATUS_ATIVOS
+            and self.data_hora is not None
+            and self.data_hora > timezone.now()
+        )
 
     def clean(self):
         erros = {}

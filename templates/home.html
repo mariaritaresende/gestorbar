@@ -1,69 +1,76 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block titulo %}GestorBar — Gestão para bares e restaurantes{% endblock %}
+{% block titulo %}GestorBar, do pedido na mesa à baixa no estoque{% endblock %}
 
 {% block conteudo %}
-<section class="hero">
+<section class="gb-hero">
   <div class="container">
-    <div class="row align-items-center g-4">
-      <div class="col-lg-7">
-        <h1 class="display-5 fw-bold">Seu bar organizado, <span class="marca">da mesa ao estoque</span>.</h1>
-        <p class="lead text-body-secondary mt-3">
-          Comandas por mesa, cardápio com ficha técnica e controle de bebidas e ingredientes
-          com baixa automática no estoque a cada conta fechada.
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <h1 class="gb-titulo display-5 mb-3">Do pedido na mesa à baixa no estoque.</h1>
+        <p class="lead text-body-secondary mb-4">
+          O garçom lança a comanda, a cozinha acompanha a fila e, quando a conta fecha,
+          o GestorBar desconta as bebidas e os ingredientes usados.
         </p>
-        <div class="d-flex gap-2 mt-4 flex-wrap">
-          <a href="{% url 'admin:index' %}" class="btn btn-warning btn-lg">
-            <i class="bi bi-speedometer2"></i> Acessar painel
-          </a>
-          <span class="btn btn-outline-secondary btn-lg disabled" aria-disabled="true">
-            Área do cliente (em breve)
-          </span>
+        <div class="d-flex flex-wrap gap-2">
+          {% if user.is_staff %}
+            <a href="{% url 'admin:index' %}" class="btn btn-warning btn-lg fw-semibold">Abrir o painel da equipe</a>
+          {% elif user.is_authenticated %}
+            <a href="{% url 'pedidos:minha_area' %}" class="btn btn-warning btn-lg fw-semibold">Ir para minha área</a>
+            <a href="{% url 'pedidos:reserva_nova' %}" class="btn btn-outline-secondary btn-lg">Fazer uma reserva</a>
+          {% else %}
+            <a href="{% url 'pedidos:cardapio' %}" class="btn btn-warning btn-lg fw-semibold">Ver o cardápio</a>
+            <a href="{% url 'contas:cadastro' %}" class="btn btn-outline-secondary btn-lg">Criar conta e reservar</a>
+          {% endif %}
         </div>
+      </div>
+
+      <div class="col-lg-6">
+        {# Exemplo ilustrativo: a mesma comanda usada na demonstração. #}
+        <figure class="gb-comanda mx-auto" aria-label="Exemplo de comanda fechada e a baixa no estoque que ela gerou">
+          <div class="gb-comanda__papel">
+            <p class="gb-comanda__titulo">Comanda #8 — Mesa 09</p>
+            <ul class="gb-comanda__lista">
+              <li><span>2× Caipirinha de limão</span><span>49,80</span></li>
+              <li><span>1× Picanha na chapa</span><span>89,90</span></li>
+            </ul>
+            <ul class="gb-comanda__lista gb-comanda__totais">
+              <li><span>Taxa de serviço (10%)</span><span>13,97</span></li>
+              <li class="fw-bold"><span>Total</span><span>R$ 153,67</span></li>
+            </ul>
+          </div>
+          <div class="gb-comanda__canhoto">
+            <p class="gb-comanda__titulo">Baixa no estoque</p>
+            <ul class="gb-comanda__lista gb-comanda__baixas">
+              <li><span>Picanha</span><span>−0,400 kg</span></li>
+              <li><span>Cachaça artesanal</span><span>−0,120 l</span></li>
+              <li><span>Limão taiti</span><span>−0,240 kg</span></li>
+            </ul>
+          </div>
+        </figure>
       </div>
     </div>
   </div>
 </section>
 
-<section>
-  <div class="container">
-    <div class="row g-3 row-cols-1 row-cols-md-2 row-cols-lg-4">
-      <div class="col">
-        <div class="card card-recurso">
-          <div class="card-body">
-            <i class="bi bi-receipt"></i>
-            <h5 class="card-title mt-2">Comandas</h5>
-            <p class="card-text small text-body-secondary">Abertura por mesa, itens com status de preparo e fechamento com taxa de serviço.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card card-recurso">
-          <div class="card-body">
-            <i class="bi bi-journal-text"></i>
-            <h5 class="card-title mt-2">Cardápio</h5>
-            <p class="card-text small text-body-secondary">Categorias, preços e ficha técnica com custo e margem de cada prato.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card card-recurso">
-          <div class="card-body">
-            <i class="bi bi-box-seam"></i>
-            <h5 class="card-title mt-2">Estoque</h5>
-            <p class="card-text small text-body-secondary">Bebidas e ingredientes com alerta de estoque mínimo e de validade.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card card-recurso">
-          <div class="card-body">
-            <i class="bi bi-people"></i>
-            <h5 class="card-title mt-2">Perfis</h5>
-            <p class="card-text small text-body-secondary">Gerente, garçom, cozinha/bar e cliente, cada um com suas permissões.</p>
-          </div>
-        </div>
-      </div>
+<section class="container py-5">
+  <div class="row g-5">
+    <div class="col-lg-6">
+      <h2 class="gb-titulo h3 mb-3">Para quem vem ao bar</h2>
+      <ul class="gb-lista-recursos">
+        <li><i class="bi bi-journal-text"></i><div><strong>Cardápio aberto</strong><br><span class="text-body-secondary">Preços, tempo de preparo e o que está esgotado no momento.</span></div></li>
+        <li><i class="bi bi-calendar-event"></i><div><strong>Reservas pelo site</strong><br><span class="text-body-secondary">Escolha dia, horário e número de pessoas; altere ou cancele quando precisar.</span></div></li>
+        <li><i class="bi bi-receipt"></i><div><strong>Conta na palma da mão</strong><br><span class="text-body-secondary">Acompanhe os pedidos na cozinha e veja o histórico das suas contas.</span></div></li>
+      </ul>
+    </div>
+    <div class="col-lg-6">
+      <h2 class="gb-titulo h3 mb-3">Para a equipe</h2>
+      <ul class="gb-lista-recursos">
+        <li><i class="bi bi-person-badge"></i><div><strong>Um perfil para cada função</strong><br><span class="text-body-secondary">Gerente, garçom e cozinha veem só o que precisam no painel.</span></div></li>
+        <li><i class="bi bi-fire"></i><div><strong>Fila da cozinha</strong><br><span class="text-body-secondary">Itens pendentes, em preparo e prontos, com o tempo de espera.</span></div></li>
+        <li><i class="bi bi-box-seam"></i><div><strong>Estoque que se atualiza sozinho</strong><br><span class="text-body-secondary">Baixa automática pela ficha técnica, alerta de mínimo e de validade.</span></div></li>
+      </ul>
     </div>
   </div>
 </section>

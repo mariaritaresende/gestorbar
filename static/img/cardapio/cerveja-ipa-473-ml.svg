@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Cerveja IPA 473 ml">
+  <rect width="320" height="240" rx="18" fill="#D9EEF0"/>
+  <ellipse cx="160" cy="218" rx="54" ry="8" fill="#000" opacity="0.12"/>
+  <path d="M112 44 q48 -14 96 0 v168 q-48 14 -96 0z" fill="#2E6B5E"/>
+  <ellipse cx="160" cy="44" rx="48" ry="9" fill="#BFC7C9"/>
+  <ellipse cx="160" cy="44" rx="40" ry="6" fill="#9AA4A7"/>
+  <path d="M112 92 q48 -10 96 0 v70 q-48 10 -96 0z" fill="#F2A900"/>
+  <text x="160" y="138" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="700" fill="#2E6B5E">IPA</text>
+  <path d="M126 60 v140" stroke="#5E9C8E" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+</svg>

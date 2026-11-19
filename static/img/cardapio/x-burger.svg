@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="X-Burger">
+  <rect width="320" height="240" rx="18" fill="#FBEBC8"/>
+  <ellipse cx="160" cy="210" rx="92" ry="10" fill="#000" opacity="0.1"/>
+  <path d="M74 184 h172 q0 20 -20 20 h-132 q-20 0 -20 -20z" fill="#E0A055"/>
+  <rect x="68" y="152" width="184" height="34" rx="16" fill="#6B3A22"/>
+  <path d="M84 162 h150" stroke="#8A5236" stroke-width="4" stroke-linecap="round"/>
+  
+  <path d="M66 144 h188 l-16 22 l-20 -12 l-20 16 l-22 -14 l-22 14 l-22 -14 l-20 14 l-22 -16 l-24 12z" fill="#F7C531"/>
+  <path d="M74 146 q0 -80 86 -82 q86 2 86 82 z" fill="#E7A253"/>
+  <path d="M90 132 q4 -50 70 -54" stroke="#F5C988" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <g fill="#FFF3D6"><ellipse cx="130" cy="86" rx="4" ry="2.5" transform="rotate(-20 130 86)"/><ellipse cx="160" cy="78" rx="4" ry="2.5" transform="rotate(0 160 78)"/><ellipse cx="190" cy="88" rx="4" ry="2.5" transform="rotate(20 190 88)"/><ellipse cx="146" cy="102" rx="4" ry="2.5" transform="rotate(-10 146 102)"/><ellipse cx="178" cy="104" rx="4" ry="2.5" transform="rotate(12 178 104)"/><ellipse cx="118" cy="112" rx="4" ry="2.5" transform="rotate(-30 118 112)"/><ellipse cx="204" cy="114" rx="4" ry="2.5" transform="rotate(30 204 114)"/></g>
+</svg>

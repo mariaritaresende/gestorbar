@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.utils.html import format_html, format_html_join
 
 from .formatacao import numero, reais
+from .templatetags.site_pedidos import imagem_item
 from .models import (
     CategoriaCardapio,
     Comanda,
@@ -191,6 +192,7 @@ class FichaTecnicaInline(admin.TabularInline):
 @admin.register(ItemCardapio)
 class ItemCardapioAdmin(admin.ModelAdmin):
     list_display = (
+        "miniatura",
         "nome",
         "categoria",
         "preco",
@@ -218,7 +220,27 @@ class ItemCardapioAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {"fields": ("nome", "categoria", "descricao")}),
         ("Venda", {"fields": ("preco", "tempo_preparo", "disponivel", "destaque")}),
+        ("Foto", {"fields": ("imagem", "foto_atual")}),
     )
+    readonly_fields = ("foto_atual",)
+
+    @admin.display(description="")
+    def miniatura(self, obj):
+        return format_html(
+            '<img src="{}" alt="" width="56" height="42" style="object-fit:cover;border-radius:6px">',
+            imagem_item(obj),
+        )
+
+    @admin.display(description="imagem exibida no site")
+    def foto_atual(self, obj):
+        if not obj or not obj.pk:
+            return "Salve o item para ver a imagem."
+        origem = "foto enviada pelo painel" if obj.imagem else "imagem padrão do item"
+        return format_html(
+            '<img src="{}" alt="" width="240" style="border-radius:10px"><div class="mt-1 small">{}</div>',
+            imagem_item(obj),
+            origem,
+        )
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related("ficha_tecnica__insumo")
