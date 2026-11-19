@@ -32,8 +32,13 @@
                 {% for pedido in itens %}
                   <tr class="{% if pedido.status == 'CANCELADO' %}text-body-secondary text-decoration-line-through{% endif %}">
                     <td>
-                      {{ pedido.quantidade }}× {{ pedido.item.nome }}
-                      {% if pedido.observacao %}<div class="small text-body-secondary">{{ pedido.observacao }}</div>{% endif %}
+                      <div class="d-flex align-items-center gap-2">
+                        <img class="gb-miniatura" src="{{ pedido.item|imagem_item }}" alt="" width="48" height="36">
+                        <div>
+                          {{ pedido.quantidade }}× {{ pedido.item.nome }}
+                          {% if pedido.observacao %}<div class="small text-body-secondary">{{ pedido.observacao }}</div>{% endif %}
+                        </div>
+                      </div>
                     </td>
                     {% if comanda.status == "ABERTA" %}
                       <td><span class="badge text-bg-{{ pedido.status|cor_status }}">{{ pedido.get_status_display }}</span></td>

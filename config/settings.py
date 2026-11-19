@@ -97,6 +97,10 @@ STATIC_URL = "static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+# Arquivos enviados pelo painel (fotos do cardápio). A pasta media/ não vai para o Git.
+MEDIA_URL = "media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Login do site (clientes). O painel da equipe tem o próprio login em /admin/.

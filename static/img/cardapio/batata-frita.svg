@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Batata frita">
+  <rect width="320" height="240" rx="18" fill="#FBEBC8"/>
+  <ellipse cx="160" cy="214" rx="70" ry="10" fill="#000" opacity="0.1"/>
+  <rect x="112" y="38" width="14" height="92" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(-12 119 84)"/><rect x="130" y="30" width="14" height="92" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(-6 137 76)"/><rect x="148" y="26" width="14" height="92" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(0 155 72)"/><rect x="166" y="30" width="14" height="92" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(6 173 76)"/><rect x="184" y="38" width="14" height="92" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(12 191 84)"/><rect x="121" y="46" width="14" height="92" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(-3 128 92)"/><rect x="157" y="40" width="14" height="92" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(3 164 86)"/><rect x="175" y="46" width="14" height="92" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(9 182 92)"/><rect x="139" y="44" width="14" height="92" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(-9 146 90)"/>
+  <path d="M98 108 L222 108 L206 212 L114 212 Z" fill="#D6322B"/>
+  <path d="M98 108 Q160 136 222 108 L218 132 Q160 156 102 132 Z" fill="#B8241F"/>
+  <path d="M108 168 q52 22 104 0" stroke="#FFFFFF" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.9"/>
+</svg>

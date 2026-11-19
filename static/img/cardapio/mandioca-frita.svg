@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Mandioca frita">
+  <rect width="320" height="240" rx="18" fill="#FBEBC8"/>
+  <ellipse cx="160" cy="181" rx="118" ry="34" fill="#000" opacity="0.08"/>
+  <ellipse cx="160" cy="175" rx="118" ry="34" fill="#FFFFFF" stroke="#E2D6C3" stroke-width="3"/>
+  <ellipse cx="160" cy="172" rx="92" ry="24" fill="#F7F1E6"/>
+  <rect x="80" y="140" width="64" height="24" rx="11" fill="#F3D98B" stroke="#C9A24A" stroke-width="2.5" transform="rotate(-14 112 152)"/><rect x="124" y="128" width="64" height="24" rx="11" fill="#F3D98B" stroke="#C9A24A" stroke-width="2.5" transform="rotate(8 156 140)"/><rect x="168" y="142" width="64" height="24" rx="11" fill="#F3D98B" stroke="#C9A24A" stroke-width="2.5" transform="rotate(-6 200 154)"/><rect x="100" y="158" width="64" height="24" rx="11" fill="#F3D98B" stroke="#C9A24A" stroke-width="2.5" transform="rotate(10 132 170)"/><rect x="150" y="160" width="64" height="24" rx="11" fill="#F3D98B" stroke="#C9A24A" stroke-width="2.5" transform="rotate(-12 182 172)"/><rect x="196" y="150" width="64" height="24" rx="11" fill="#F3D98B" stroke="#C9A24A" stroke-width="2.5" transform="rotate(14 228 162)"/><rect x="128" y="146" width="64" height="24" rx="11" fill="#F3D98B" stroke="#C9A24A" stroke-width="2.5" transform="rotate(2 160 158)"/>
+  <ellipse cx="236" cy="132" rx="16" ry="12" fill="#FFFFFF" stroke="#E2D6C3" stroke-width="2"/>
+  <ellipse cx="236" cy="131" rx="11" ry="7" fill="#F2E7C9"/>
+</svg>

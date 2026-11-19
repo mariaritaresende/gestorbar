@@ -42,6 +42,12 @@ class ItemCardapio(models.Model):
 
     nome = models.CharField(max_length=100, unique=True)
     descricao = models.TextField("descrição", blank=True)
+    imagem = models.ImageField(
+        "foto",
+        upload_to="cardapio/",
+        blank=True,
+        help_text="Opcional. Sem foto, o site mostra uma ilustração do item.",
+    )
     categoria = models.ForeignKey(
         CategoriaCardapio, on_delete=models.PROTECT, related_name="itens"
     )

@@ -31,7 +31,10 @@
             <ul class="list-group list-group-flush mb-3">
               {% for pedido in itens_abertos %}
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                  <span>{{ pedido.quantidade }}× {{ pedido.item.nome }}</span>
+                  <span class="d-flex align-items-center gap-2">
+                    <img class="gb-miniatura" src="{{ pedido.item|imagem_item }}" alt="" width="48" height="36">
+                    {{ pedido.quantidade }}× {{ pedido.item.nome }}
+                  </span>
                   <span class="badge text-bg-{{ pedido.status|cor_status }}">{{ pedido.get_status_display }}</span>
                 </li>
               {% empty %}

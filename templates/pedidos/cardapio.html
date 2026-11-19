@@ -38,8 +38,9 @@
       <div class="row row-cols-1 row-cols-lg-2 g-0 gx-lg-5">
         {% for item in itens %}
           <div class="col">
-            <div class="gb-item d-flex justify-content-between gap-3 py-3 border-bottom {% if item.esgotado %}gb-item--esgotado{% endif %}">
-              <div>
+            <div class="gb-item d-flex gap-3 py-3 border-bottom {% if item.esgotado %}gb-item--esgotado{% endif %}">
+              <img class="gb-item__foto" src="{{ item|imagem_item }}" alt="{{ item.nome }}" width="120" height="90" loading="lazy">
+              <div class="flex-grow-1">
                 <h3 class="h6 mb-1">
                   {{ item.nome }}
                   {% if item.destaque %}<span class="badge text-bg-warning ms-1">Destaque</span>{% endif %}

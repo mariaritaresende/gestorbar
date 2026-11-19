@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Caipirinha de limão">
+  <rect width="320" height="240" rx="18" fill="#D9EEF0"/>
+  <ellipse cx="160" cy="214" rx="64" ry="9" fill="#000" opacity="0.12"/>
+  <rect x="184" y="40" width="8" height="120" rx="4" fill="#F2A900" transform="rotate(14 188 100)"/>
+  <path d="M100 96 h120 l-10 106 q-1 10 -11 10 h-78 q-10 0 -11 -10z" fill="#FFFFFF" fill-opacity="0.55" stroke="#BFD5DA" stroke-width="3"/>
+  <path d="M104 116 h112 l-8 84 q-1 8 -9 8 h-78 q-8 0 -9 -8z" fill="#E9F5D3"/>
+  <g stroke="#B9DCE6" stroke-width="2" fill="#FFFFFF" fill-opacity="0.85">
+    <rect x="114" y="112" width="34" height="30" rx="5" transform="rotate(-10 131 127)"/>
+    <rect x="164" y="108" width="34" height="30" rx="5" transform="rotate(12 181 123)"/>
+    <rect x="138" y="140" width="34" height="30" rx="5" transform="rotate(4 155 155)"/>
+  </g>
+  <g fill="#7DBA3A" stroke="#4E8A1C" stroke-width="2.5">
+    <path d="M118 182 a20 20 0 0 1 34 4 z"/><path d="M160 190 a20 20 0 0 1 36 -6 z"/>
+  </g>
+  <path d="M100 96 h120" stroke="#DCEAEE" stroke-width="4"/>
+</svg>
