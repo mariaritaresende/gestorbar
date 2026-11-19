@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Filé de frango com fritas">
+  <rect width="320" height="240" rx="18" fill="#FBEBC8"/>
+  <ellipse cx="160" cy="181" rx="118" ry="34" fill="#000" opacity="0.08"/>
+  <ellipse cx="160" cy="175" rx="118" ry="34" fill="#FFFFFF" stroke="#E2D6C3" stroke-width="3"/>
+  <ellipse cx="160" cy="172" rx="92" ry="24" fill="#F7F1E6"/>
+  <path d="M84 160 q10 -40 60 -36 q40 4 34 34 q-6 30 -50 30 q-50 0 -44 -28z" fill="#E7A74B" stroke="#B9782A" stroke-width="3"/>
+  <path d="M104 150 l40 -14 M108 166 l50 -18 M120 178 l42 -14" stroke="#9A5C1C" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <rect x="186" y="126" width="11" height="58" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(60 191 155)"/><rect x="190" y="140" width="11" height="58" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(72 195 169)"/><rect x="184" y="152" width="11" height="58" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(52 189 181)"/><rect x="200" y="118" width="11" height="58" rx="4" fill="#F5C443" stroke="#D99A1E" stroke-width="2" transform="rotate(80 205 147)"/>
+  <circle cx="118" cy="132" r="6" fill="#6FAE3B"/><circle cx="128" cy="128" r="5" fill="#84C24A"/>
+</svg>

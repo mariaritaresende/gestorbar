@@ -1,0 +1,14 @@
+{% comment %}
+  Um campo de formulário no padrão do Bootstrap.
+  Uso: {% include "partials/campo.html" with campo=form.email %}
+{% endcomment %}
+{% if campo.is_hidden %}{{ campo }}{% else %}
+<div class="mb-3">
+  <label class="form-label" for="{{ campo.id_for_label }}">
+    {{ campo.label }}{% if campo.field.required %} <span class="text-danger" aria-hidden="true">*</span>{% endif %}
+  </label>
+  {{ campo }}
+  {% for erro in campo.errors %}<div class="invalid-feedback d-block">{{ erro }}</div>{% endfor %}
+  {% if campo.help_text %}<div class="form-text">{{ campo.help_text|safe }}</div>{% endif %}
+</div>
+{% endif %}

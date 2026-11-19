@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Gin tônica">
+  <rect width="320" height="240" rx="18" fill="#D9EEF0"/>
+  <ellipse cx="160" cy="216" rx="46" ry="7" fill="#000" opacity="0.12"/>
+  <path d="M100 52 h120 q6 80 -46 98 v44 h26 q8 0 8 8 h-96 q0 -8 8 -8 h26 v-44 q-52 -18 -46 -98z" fill="#FFFFFF" fill-opacity="0.55" stroke="#BFD5DA" stroke-width="3"/>
+  <path d="M104 84 h112 q-4 56 -56 62 q-52 -6 -56 -62z" fill="#E6F4F1"/>
+  <g fill="#FFFFFF" stroke="#B9DCE6" stroke-width="1.5"><circle cx="132" cy="110" r="5"/><circle cx="182" cy="104" r="4"/><circle cx="160" cy="124" r="3.5"/><circle cx="196" cy="122" r="3"/></g>
+  <circle cx="142" cy="96" r="18" fill="#9BD15A" stroke="#5E9A1E" stroke-width="2.5"/>
+  <path d="M142 80 v32 M126 96 h32 M131 85 l22 22 M153 85 l-22 22" stroke="#D9F0B0" stroke-width="2"/>
+  <path d="M188 56 q-4 -22 14 -34" stroke="#3F7D3A" stroke-width="3" fill="none"/>
+  <g fill="#5FA15A"><ellipse cx="200" cy="30" rx="8" ry="4" transform="rotate(-30 200 30)"/><ellipse cx="192" cy="42" rx="8" ry="4" transform="rotate(30 192 42)"/></g>
+</svg>

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load site_pedidos %}
+
+{% block titulo %}Reservas | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-4">
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+    <h1 class="gb-titulo mb-0">Reservas</h1>
+    <a class="btn btn-warning fw-semibold" href="{% url 'pedidos:reserva_nova' %}"><i class="bi bi-plus-lg"></i> Nova reserva</a>
+  </div>
+  {% include "partials/menu_cliente.html" %}
+
+  <h2 class="h5">Próximas</h2>
+  {% if proximas %}
+    <div class="list-group shadow-sm mb-4">
+      {% for reserva in proximas %}
+        <div class="list-group-item p-3">
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <div>
+              <div class="fw-semibold">{{ reserva.data_hora|date:"l, d/m/Y" }} às {{ reserva.data_hora|time:"H:i" }}</div>
+              <div class="small text-body-secondary">
+                {{ reserva.pessoas }} pessoa{{ reserva.pessoas|pluralize }}
+                {% if reserva.mesa %}· {{ reserva.mesa }}{% else %}· mesa a definir{% endif %}
+                {% if reserva.observacao %}· {{ reserva.observacao|truncatechars:60 }}{% endif %}
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="badge text-bg-{{ reserva.status|cor_status }}">{{ reserva.get_status_display }}</span>
+              <a class="btn btn-outline-secondary btn-sm" href="{% url 'pedidos:reserva_editar' reserva.pk %}">Alterar</a>
+              <a class="btn btn-outline-danger btn-sm" href="{% url 'pedidos:reserva_cancelar' reserva.pk %}">Cancelar</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card card-body mb-4">
+      <p class="mb-2">Você não tem reservas marcadas.</p>
+      <div><a class="btn btn-warning fw-semibold" href="{% url 'pedidos:reserva_nova' %}">Fazer uma reserva</a></div>
+    </div>
+  {% endif %}
+
+  {% if anteriores %}
+    <h2 class="h5">Anteriores e canceladas</h2>
+    <div class="table-responsive">
+      <table class="table align-middle">
+        <thead><tr><th>Data</th><th>Pessoas</th><th>Mesa</th><th>Situação</th></tr></thead>
+        <tbody>
+          {% for reserva in anteriores %}
+            <tr>
+              <td>{{ reserva.data_hora|date:"d/m/Y H:i" }}</td>
+              <td>{{ reserva.pessoas }}</td>
+              <td>{{ reserva.mesa|default:"—" }}</td>
+              <td><span class="badge text-bg-{{ reserva.status|cor_status }}">{{ reserva.get_status_display }}</span></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

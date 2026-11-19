@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Suco de laranja">
+  <rect width="320" height="240" rx="18" fill="#D9EEF0"/>
+  <ellipse cx="156" cy="216" rx="50" ry="8" fill="#000" opacity="0.12"/>
+  <path d="M110 58 h92 l-12 150 q-1 8 -9 8 h-50 q-8 0 -9 -8z" fill="#FFFFFF" fill-opacity="0.65" stroke="#BFD5DA" stroke-width="3"/>
+  <path d="M114 92 h84 l-9 114 q-1 6 -7 6 h-52 q-6 0 -7 -6z" fill="#F7A325"/>
+  <path d="M114 92 h84" stroke="#FBC86B" stroke-width="5"/>
+  <circle cx="204" cy="62" r="30" fill="#F7A325" stroke="#E07E12" stroke-width="3"/>
+  <circle cx="204" cy="62" r="22" fill="#FCD27A"/>
+  <path d="M204 40 v44 M182 62 h44 M188 46 l32 32 M220 46 l-32 32" stroke="#F7A325" stroke-width="2.5"/>
+  <rect x="152" y="30" width="7" height="110" rx="3" fill="#2F9E8F" transform="rotate(12 155 85)"/>
+</svg>

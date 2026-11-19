@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block titulo %}{% if object %}Alterar reserva{% else %}Nova reserva{% endif %} | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-4">
+  <h1 class="gb-titulo mb-3">{% if object %}Alterar reserva{% else %}Nova reserva{% endif %}</h1>
+  {% include "partials/menu_cliente.html" %}
+
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          {% if object and object.status == "CONFIRMADA" %}
+            <div class="alert alert-info">Esta reserva já foi confirmada. Se você alterar, ela volta para a equipe confirmar de novo.</div>
+          {% endif %}
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include "partials/erros_form.html" %}
+            <div class="row">
+              <div class="col-sm-6">{% include "partials/campo.html" with campo=form.data %}</div>
+              <div class="col-sm-6">{% include "partials/campo.html" with campo=form.hora %}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">{% include "partials/campo.html" with campo=form.pessoas %}</div>
+            </div>
+            {% include "partials/campo.html" with campo=form.observacao %}
+            <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-warning fw-semibold">{% if object %}Salvar alterações{% else %}Enviar reserva{% endif %}</button>
+              <a class="btn btn-outline-secondary" href="{% url 'pedidos:reservas' %}">Voltar</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <div class="gb-chamada rounded-3 p-4">
+        <h2 class="h6">Como funciona</h2>
+        <ul class="small mb-0 ps-3">
+          <li>Reservas das 11h30 às 23h, com pelo menos 1 hora de antecedência.</li>
+          <li>Uma reserva por dia por cliente.</li>
+          <li>A equipe confirma e escolhe a mesa conforme o número de pessoas.</li>
+          <li>Você pode alterar ou cancelar até o horário marcado.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

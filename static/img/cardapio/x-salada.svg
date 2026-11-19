@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="X-Salada">
+  <rect width="320" height="240" rx="18" fill="#FBEBC8"/>
+  <ellipse cx="160" cy="222" rx="92" ry="9" fill="#000" opacity="0.1"/>
+  <path d="M74 198 h172 q0 18 -20 18 h-132 q-20 0 -20 -18z" fill="#E0A055"/>
+  <rect x="68" y="168" width="184" height="32" rx="15" fill="#6B3A22"/>
+  <path d="M84 178 h150" stroke="#8A5236" stroke-width="4" stroke-linecap="round"/>
+  <path d="M66 160 h188 l-16 20 l-20 -10 l-20 14 l-22 -12 l-22 12 l-22 -12 l-20 12 l-22 -14 l-24 10z" fill="#F7C531"/>
+  <rect x="80" y="148" width="74" height="14" rx="7" fill="#E1453A"/>
+  <rect x="166" y="148" width="74" height="14" rx="7" fill="#E1453A"/>
+  <path d="M58 138 q14 -10 26 2 q14 -12 26 0 q14 -12 26 0 q14 -12 26 0 q14 -12 26 0 q14 -12 26 0 q14 -12 26 0 q10 -8 20 2 l-6 12 q-10 -6 -18 2 q-14 -10 -26 0 q-14 -10 -26 0 q-14 -10 -26 0 q-14 -10 -26 0 q-14 -10 -26 0 q-14 -10 -26 0 q-12 -8 -22 0z" fill="#7DBA3A"/>
+  <path d="M74 140 q0 -80 86 -82 q86 2 86 82 z" fill="#E7A253"/>
+  <path d="M90 126 q4 -50 70 -54" stroke="#F5C988" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <g fill="#FFF3D6"><ellipse cx="130" cy="78" rx="4" ry="2.5" transform="rotate(-20 130 78)"/><ellipse cx="160" cy="70" rx="4" ry="2.5" transform="rotate(0 160 70)"/><ellipse cx="190" cy="80" rx="4" ry="2.5" transform="rotate(20 190 80)"/><ellipse cx="146" cy="94" rx="4" ry="2.5" transform="rotate(-10 146 94)"/><ellipse cx="178" cy="96" rx="4" ry="2.5" transform="rotate(12 178 96)"/><ellipse cx="118" cy="104" rx="4" ry="2.5" transform="rotate(-30 118 104)"/><ellipse cx="204" cy="106" rx="4" ry="2.5" transform="rotate(30 204 106)"/></g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Frango a passarinho">
+  <rect width="320" height="240" rx="18" fill="#FBEBC8"/>
+  <ellipse cx="160" cy="181" rx="118" ry="34" fill="#000" opacity="0.08"/>
+  <ellipse cx="160" cy="175" rx="118" ry="34" fill="#FFFFFF" stroke="#E2D6C3" stroke-width="3"/>
+  <ellipse cx="160" cy="172" rx="92" ry="24" fill="#F7F1E6"/>
+  <path d="M92 160 q14 -22 34 -10 q18 8 8 26 q-10 16 -30 10 q-18 -6 -12 -26z" fill="#D9892E" stroke="#A85F17" stroke-width="2.5"/><path d="M100 158 q8 -8 18 -4" stroke="#F2B866" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M130 150 q14 -22 34 -10 q18 8 8 26 q-10 16 -30 10 q-18 -6 -12 -26z" fill="#D9892E" stroke="#A85F17" stroke-width="2.5"/><path d="M138 148 q8 -8 18 -4" stroke="#F2B866" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M170 158 q14 -22 34 -10 q18 8 8 26 q-10 16 -30 10 q-18 -6 -12 -26z" fill="#D9892E" stroke="#A85F17" stroke-width="2.5"/><path d="M178 156 q8 -8 18 -4" stroke="#F2B866" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M112 176 q14 -22 34 -10 q18 8 8 26 q-10 16 -30 10 q-18 -6 -12 -26z" fill="#D9892E" stroke="#A85F17" stroke-width="2.5"/><path d="M120 174 q8 -8 18 -4" stroke="#F2B866" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M152 178 q14 -22 34 -10 q18 8 8 26 q-10 16 -30 10 q-18 -6 -12 -26z" fill="#D9892E" stroke="#A85F17" stroke-width="2.5"/><path d="M160 176 q8 -8 18 -4" stroke="#F2B866" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M196 172 q14 -22 34 -10 q18 8 8 26 q-10 16 -30 10 q-18 -6 -12 -26z" fill="#D9892E" stroke="#A85F17" stroke-width="2.5"/><path d="M204 170 q8 -8 18 -4" stroke="#F2B866" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M220 140 a22 22 0 0 1 36 18 z" fill="#8CC63F" stroke="#5E9A1E" stroke-width="2.5"/>
+  <path d="M226 146 l14 10 M234 140 l8 14" stroke="#D9F0B0" stroke-width="2"/>
+</svg>

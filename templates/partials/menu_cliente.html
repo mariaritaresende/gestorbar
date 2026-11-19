@@ -1,0 +1,11 @@
+{% comment %}Atalhos da área do cliente, exibidos no topo das páginas da área.{% endcomment %}
+{% with url=request.resolver_match.view_name %}
+<nav class="gb-menu-cliente mb-4" aria-label="Área do cliente">
+  <ul class="nav nav-pills flex-nowrap overflow-auto">
+    <li class="nav-item"><a class="nav-link {% if url == 'pedidos:minha_area' %}active{% endif %}" href="{% url 'pedidos:minha_area' %}"><i class="bi bi-house"></i> Resumo</a></li>
+    <li class="nav-item"><a class="nav-link {% if 'reserva' in url %}active{% endif %}" href="{% url 'pedidos:reservas' %}"><i class="bi bi-calendar-event"></i> Reservas</a></li>
+    <li class="nav-item"><a class="nav-link {% if 'comanda' in url %}active{% endif %}" href="{% url 'pedidos:comandas' %}"><i class="bi bi-receipt"></i> Minhas contas</a></li>
+    <li class="nav-item"><a class="nav-link {% if url == 'contas:perfil' or url == 'contas:trocar_senha' %}active{% endif %}" href="{% url 'contas:perfil' %}"><i class="bi bi-person"></i> Meus dados</a></li>
+  </ul>
+</nav>
+{% endwith %}

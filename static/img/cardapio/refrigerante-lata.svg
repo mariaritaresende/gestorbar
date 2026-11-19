@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Refrigerante em lata">
+  <rect width="320" height="240" rx="18" fill="#D9EEF0"/>
+  <ellipse cx="160" cy="218" rx="46" ry="7" fill="#000" opacity="0.12"/>
+  <path d="M122 58 q38 -12 76 0 v150 q-38 12 -76 0z" fill="#D9322E"/>
+  <ellipse cx="160" cy="58" rx="38" ry="8" fill="#C7CCCE"/>
+  <ellipse cx="160" cy="58" rx="30" ry="5" fill="#A3AAAD"/>
+  <path d="M122 126 q38 -24 76 -4" stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M134 74 v124" stroke="#F07A72" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+  <g fill="#FFFFFF" opacity="0.7"><circle cx="176" cy="160" r="4"/><circle cx="186" cy="176" r="3"/><circle cx="172" cy="186" r="2.5"/></g>
+</svg>

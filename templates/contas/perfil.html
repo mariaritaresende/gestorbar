@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block titulo %}Meus dados | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-4">
+  <h1 class="gb-titulo mb-3">Meus dados</h1>
+  {% include "partials/menu_cliente.html" %}
+
+  <div class="row g-4">
+    <div class="col-lg-7">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include "partials/erros_form.html" %}
+            <div class="row">
+              <div class="col-sm-6">{% include "partials/campo.html" with campo=form.first_name %}</div>
+              <div class="col-sm-6">{% include "partials/campo.html" with campo=form.last_name %}</div>
+            </div>
+            <div class="row">
+              <div class="col-sm-7">{% include "partials/campo.html" with campo=form.email %}</div>
+              <div class="col-sm-5">{% include "partials/campo.html" with campo=form.telefone %}</div>
+            </div>
+            <button type="submit" class="btn btn-warning fw-semibold">Salvar alterações</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h2 class="h5">Acesso</h2>
+          <dl class="row mb-3 small">
+            <dt class="col-5">Usuário</dt><dd class="col-7">{{ user.username }}</dd>
+            <dt class="col-5">Cliente desde</dt><dd class="col-7">{{ user.date_joined|date:"d/m/Y" }}</dd>
+          </dl>
+          <a class="btn btn-outline-secondary" href="{% url 'contas:trocar_senha' %}">Trocar senha</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

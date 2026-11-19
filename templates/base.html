@@ -5,50 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block titulo %}GestorBar{% endblock %}</title>
   <script src="{% static 'js/tema.js' %}"></script>
+  <link rel="icon" href="{% static 'img/gestorbar-logo.svg' %}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
   <link href="{% static 'css/estilo.css' %}" rel="stylesheet">
   {% block extra_head %}{% endblock %}
 </head>
 <body class="d-flex flex-column min-vh-100">
+  <a class="visually-hidden-focusable btn btn-warning position-absolute m-2" href="#conteudo">Pular para o conteúdo</a>
+
   <nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom">
     <div class="container">
-      <a class="navbar-brand fw-semibold" href="{% url 'home' %}">
-        <i class="bi bi-cup-straw text-warning"></i> GestorBar
+      <a class="navbar-brand gb-marca" href="{% url 'home' %}">
+        <img src="{% static 'img/gestorbar-logo.svg' %}" alt="" width="34" height="34">
+        GestorBar
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
               aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      {% with url=request.resolver_match.view_name %}
       <div class="collapse navbar-collapse" id="menu">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Início</a></li>
+          <li class="nav-item">
+            <a class="nav-link {% if url == 'home' %}active{% endif %}" href="{% url 'home' %}">Início</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if url == 'pedidos:cardapio' %}active{% endif %}" href="{% url 'pedidos:cardapio' %}">Cardápio</a>
+          </li>
+          {% if user.is_authenticated and not user.is_staff %}
+            <li class="nav-item">
+              <a class="nav-link {% if url == 'pedidos:minha_area' %}active{% endif %}" href="{% url 'pedidos:minha_area' %}">Minha área</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if 'reserva' in url %}active{% endif %}" href="{% url 'pedidos:reservas' %}">Reservas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if 'comanda' in url %}active{% endif %}" href="{% url 'pedidos:comandas' %}">Minhas contas</a>
+            </li>
+          {% endif %}
           {% if user.is_staff %}
-            <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Painel administrativo</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Painel da equipe</a></li>
           {% endif %}
         </ul>
-        <div class="d-flex align-items-center gap-2">
-          <button id="alternar-tema" class="btn btn-outline-secondary btn-sm" type="button" title="Alternar tema claro/escuro">
+
+        <div class="d-flex align-items-center gap-2 pt-2 pt-lg-0">
+          <button id="alternar-tema" class="btn btn-outline-secondary btn-sm" type="button" title="Alternar tema claro/escuro" aria-label="Alternar tema claro/escuro">
             <i data-tema-icone class="bi bi-moon-stars-fill"></i>
           </button>
           {% if user.is_authenticated %}
-            <span class="small text-body-secondary">Olá, {{ user.first_name|default:user.username }}</span>
+            <div class="dropdown">
+              <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i> {{ user.first_name|default:user.username }}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                {% if user.is_staff %}
+                  <li><a class="dropdown-item" href="{% url 'admin:index' %}">Painel da equipe</a></li>
+                {% else %}
+                  <li><a class="dropdown-item" href="{% url 'pedidos:minha_area' %}">Minha área</a></li>
+                  <li><a class="dropdown-item" href="{% url 'contas:perfil' %}">Meus dados</a></li>
+                {% endif %}
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <form method="post" action="{% url 'contas:sair' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="dropdown-item">Sair</button>
+                  </form>
+                </li>
+              </ul>
+            </div>
           {% else %}
-            <a class="btn btn-warning btn-sm" href="{% url 'admin:login' %}">Entrar</a>
+            <a class="btn btn-outline-secondary btn-sm" href="{% url 'contas:entrar' %}">Entrar</a>
+            <a class="btn btn-warning btn-sm" href="{% url 'contas:cadastro' %}">Criar conta</a>
           {% endif %}
         </div>
       </div>
+      {% endwith %}
     </div>
   </nav>
 
-  <main class="flex-grow-1">
+  {% if messages %}
+    <div class="container mt-3" aria-live="polite">
+      {% for mensagem in messages %}
+        <div class="alert alert-{{ mensagem.tags|default:'info' }} alert-dismissible fade show" role="alert">
+          {{ mensagem }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <main id="conteudo" class="flex-grow-1">
     {% block conteudo %}{% endblock %}
   </main>
 
   <footer class="border-top py-3 mt-5">
     <div class="container small text-body-secondary d-flex justify-content-between flex-wrap gap-2">
-      <span>GestorBar — Sistema de Gestão para Bares e Restaurantes</span>
-      <span>GAC116 · Programação Web · UFLA</span>
+      <span>GestorBar, sistema de gestão para bares e restaurantes</span>
+      <span>GAC116 Programação Web (UFLA)</span>
     </div>
   </footer>
 

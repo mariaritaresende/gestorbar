@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Água mineral">
+  <rect width="320" height="240" rx="18" fill="#D9EEF0"/>
+  <ellipse cx="160" cy="218" rx="40" ry="7" fill="#000" opacity="0.12"/>
+  <rect x="148" y="26" width="24" height="16" rx="3" fill="#2F7FC1"/>
+  <path d="M148 42 h24 q0 16 14 24 q12 8 12 22 v112 q0 10 -10 10 h-56 q-10 0 -10 -10 v-112 q0 -14 12 -22 q14 -8 14 -24z" fill="#CFEAF7" stroke="#8CC4E3" stroke-width="3"/>
+  <path d="M122 116 h76 v84 q0 8 -8 8 h-60 q-8 0 -8 -8z" fill="#A9D8F0"/>
+  <rect x="122" y="128" width="76" height="34" fill="#2F7FC1"/>
+  <path d="M160 136 q8 10 0 18 q-8 -8 0 -18z" fill="#FFFFFF"/>
+  <path d="M134 74 q-6 30 -4 120" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+</svg>

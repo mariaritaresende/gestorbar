@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load site_pedidos %}
+
+{% block titulo %}Minha área | GestorBar{% endblock %}
+
+{% block conteudo %}
+<div class="container py-4">
+  <h1 class="gb-titulo mb-1">Olá, {{ user.first_name|default:user.username }}</h1>
+  <p class="text-body-secondary mb-3">
+    {% if total_visitas %}
+      Você já veio {{ total_visitas }} vez{{ total_visitas|pluralize:"es" }} e somou {{ total_gasto|reais }} em contas.
+    {% elif proxima_reserva or comanda_aberta %}
+      Bem-vindo(a) ao GestorBar.
+    {% else %}
+      Bem-vindo(a) ao GestorBar. Faça sua primeira reserva.
+    {% endif %}
+  </p>
+  {% include "partials/menu_cliente.html" %}
+
+  <div class="row g-4">
+    {# ---------------- Comanda em andamento ---------------- #}
+    <div class="col-lg-7">
+      <div class="card shadow-sm h-100">
+        <div class="card-body p-4">
+          <h2 class="h5 mb-3">Sua mesa agora</h2>
+          {% if comanda_aberta %}
+            <p class="mb-3">
+              <strong>{{ comanda_aberta.mesa }}</strong>
+              {% if comanda_aberta.garcom %}· atendimento de {{ comanda_aberta.garcom.first_name|default:comanda_aberta.garcom.username }}{% endif %}
+            </p>
+            <ul class="list-group list-group-flush mb-3">
+              {% for pedido in itens_abertos %}
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  <span class="d-flex align-items-center gap-2">
+                    <img class="gb-miniatura" src="{{ pedido.item|imagem_item }}" alt="" width="48" height="36">
+                    {{ pedido.quantidade }}× {{ pedido.item.nome }}
+                  </span>
+                  <span class="badge text-bg-{{ pedido.status|cor_status }}">{{ pedido.get_status_display }}</span>
+                </li>
+              {% empty %}
+                <li class="list-group-item px-0 text-body-secondary">Nenhum item pedido ainda.</li>
+              {% endfor %}
+            </ul>
+            <div class="d-flex justify-content-between align-items-center">
+              <span>Total parcial: <strong>{{ comanda_aberta.total|reais }}</strong></span>
+              <a class="btn btn-outline-secondary btn-sm" href="{% url 'pedidos:comanda' comanda_aberta.pk %}">Ver a conta</a>
+            </div>
+          {% else %}
+            <p class="text-body-secondary">Quando o garçom abrir uma comanda no seu nome, você acompanha aqui os pedidos e o andamento na cozinha.</p>
+            <a class="btn btn-outline-secondary" href="{% url 'pedidos:cardapio' %}">Ver o cardápio</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {# ---------------- Próxima reserva ---------------- #}
+    <div class="col-lg-5">
+      <div class="card shadow-sm h-100">
+        <div class="card-body p-4">
+          <h2 class="h5 mb-3">Próxima reserva</h2>
+          {% if proxima_reserva %}
+            <p class="gb-titulo h3 mb-1">{{ proxima_reserva.data_hora|date:"d/m" }} às {{ proxima_reserva.data_hora|time:"H:i" }}</p>
+            <p class="mb-2">
+              {{ proxima_reserva.pessoas }} pessoa{{ proxima_reserva.pessoas|pluralize }}
+              {% if proxima_reserva.mesa %}· {{ proxima_reserva.mesa }}{% endif %}
+            </p>
+            <span class="badge text-bg-{{ proxima_reserva.status|cor_status }}">{{ proxima_reserva.get_status_display }}</span>
+            {% if proxima_reserva.status == "PENDENTE" %}
+              <p class="small text-body-secondary mt-2 mb-0">A equipe ainda vai confirmar e escolher a mesa.</p>
+            {% endif %}
+            <div class="d-flex gap-2 mt-3">
+              <a class="btn btn-outline-secondary btn-sm" href="{% url 'pedidos:reserva_editar' proxima_reserva.pk %}">Alterar</a>
+              <a class="btn btn-link btn-sm" href="{% url 'pedidos:reservas' %}">Todas as reservas</a>
+            </div>
+          {% else %}
+            <p class="text-body-secondary">Você não tem reservas marcadas.</p>
+            <a class="btn btn-warning fw-semibold" href="{% url 'pedidos:reserva_nova' %}">Fazer uma reserva</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    {# ---------------- Últimas contas ---------------- #}
+    <div class="col-12">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="h5 mb-0">Últimas contas</h2>
+            <a class="small" href="{% url 'pedidos:comandas' %}">Ver todas</a>
+          </div>
+          {% if ultimas_comandas %}
+            <div class="table-responsive">
+              <table class="table align-middle mb-0">
+                <thead><tr><th>Data</th><th>Mesa</th><th>Pagamento</th><th class="text-end">Total</th><th></th></tr></thead>
+                <tbody>
+                  {% for comanda in ultimas_comandas %}
+                    <tr>
+                      <td>{{ comanda.fechada_em|date:"d/m/Y" }}</td>
+                      <td>{{ comanda.mesa }}</td>
+                      <td>{{ comanda.get_forma_pagamento_display|default:"—" }}</td>
+                      <td class="text-end">{{ comanda.total|reais }}</td>
+                      <td class="text-end"><a href="{% url 'pedidos:comanda' comanda.pk %}">Detalhes</a></td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+            <p class="text-body-secondary mb-0">Suas contas fechadas aparecem aqui.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
